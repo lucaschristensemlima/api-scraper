@@ -1,0 +1,24 @@
+{
+  "name": "api-scraper",
+  "version": "1.0.0",
+  "description": "serviço para obter informações de sites, feito para o desáfio de estágio da BGC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucaschristensemlima/api-scraper.git"
+  },
+  "author": "Lucas Christensem Lima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucaschristensemlima/api-scraper/issues"
+  },
+  "homepage": "https://github.com/lucaschristensemlima/api-scraper#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "esbuild": "^0.17.11",
+    "serverless-esbuild": "^1.40.0"
+  }
+}
