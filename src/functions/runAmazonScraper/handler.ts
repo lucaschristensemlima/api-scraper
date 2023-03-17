@@ -28,8 +28,8 @@ export async function main() {
     { waitUntil: "networkidle2" }
   );
 
-  const z = await page.evaluate(() => {
-    const a = [];
+  const products = await page.evaluate(() => {
+    const products = [];
 
     /*como a referência é (.a-carousel-card)
        foi necessário subir alguns nós, com o intuito de chegar ao elemento que traz a informação da categoria*/
@@ -56,9 +56,9 @@ export async function main() {
       .querySelectorAll(".a-carousel-card")
 
       .forEach((item) => {
-        const [ranking, rest] = Array.from(item.childNodes);
+        const [rankingInc, rest] = Array.from(item.childNodes);
         const rest2 = rest.childNodes[0];
-        const [image, productName, maybeSAA, maybePrice] = Array.from(
+        const [image, productNameInc, maybeSAA, maybePrice] = Array.from(
           rest2.childNodes
         );
 
@@ -67,34 +67,43 @@ export async function main() {
           maybePrice
         );
 
-        const starsText =
+        const stars =
           starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[0]
             ?.textContent;
-        const avaliationsText =
+        const avaliations =
           starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[2]
             ?.textContent;
 
-        const rankingText = ranking?.textContent;
-        const productNameText = productName?.textContent;
-        const priceText = getPrice(maybeSAA, maybePrice);
-        const categoryText = getCategory(item);
+        const ranking = rankingInc?.textContent;
+        const productName = productNameInc?.textContent;
+        const price = getPrice(maybeSAA, maybePrice);
+        const category = getCategory(item);
 
         console.log({
-          rankingText,
-          starsText,
-          avaliationsText,
-          productNameText,
-          priceText,
-          categoryText,
+          ranking,
+          stars,
+          avaliations,
+          productName,
+          price,
+          category,
+        });
+
+        products.push({
+          ranking,
+          stars,
+          avaliations,
+          productName,
+          price,
+          category,
         });
       });
 
-    return Promise.resolve(a);
+    return Promise.resolve(products);
   });
 
-  console.log({ z });
+  console.log({ products });
 
-  //await browser.close();
+  await browser.close();
 }
 /*
 {
