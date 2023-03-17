@@ -12,3 +12,7 @@ plugins:
 
 package:
   individually: true
+
+functions:
+  RunAmazonScraper:
+    handler: src/functions/runAmazonScraper/handler.main

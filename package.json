@@ -20,5 +20,8 @@
     "@types/node": "^18.15.3",
     "esbuild": "^0.17.11",
     "serverless-esbuild": "^1.40.0"
+  },
+  "dependencies": {
+    "puppeteer": "^19.7.5"
   }
 }
