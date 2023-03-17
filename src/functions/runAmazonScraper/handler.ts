@@ -31,15 +31,15 @@ export async function main() {
   const z = await page.evaluate(() => {
     const a = [];
 
+    /*como a referência é (.a-carousel-card)
+       foi necessário subir alguns nós, com o intuito de chegar ao elemento que traz a informação da categoria*/
+
     function getCategory(item: Element) {
-      const categoryAndAll =
-        item.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-      const category = categoryAndAll.childNodes[1];
+      const category =
+        item.parentNode?.parentNode?.parentNode?.parentNode?.parentNode
+          ?.parentNode.childNodes[2]?.childNodes[0]?.childNodes[0];
 
-      /* os elementos categoria eram da forma : CategoryName Ver mais 
-          uso do replace para ficar somente com o que nos interessava*/
-
-      return category.textContent.replace(" Ver mais", "");
+      return category?.textContent;
     }
 
     function getPrice(x: Node, y: Node) {
@@ -71,11 +71,8 @@ export async function main() {
           starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[0]
             ?.textContent;
         const avaliationsText =
-          starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[1]
+          starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[2]
             ?.textContent;
-
-        /*como a referência é (.a-carousel-card)
-       foi necessário subir alguns nós, com o intuito de chegar ao elemento que traz a informação da categoria*/
 
         const rankingText = ranking?.textContent;
         const productNameText = productName?.textContent;
