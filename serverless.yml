@@ -16,3 +16,7 @@ package:
 functions:
   RunAmazonScraper:
     handler: src/functions/runAmazonScraper/handler.main
+    events:
+      - http:
+          path: amazon/mais-vendidos
+          method: get

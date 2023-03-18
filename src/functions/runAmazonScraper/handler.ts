@@ -28,6 +28,9 @@ export async function main() {
     { waitUntil: "networkidle2" }
   );
 
+  /*
+    Ao usar o .evaluate, todo comando é executado no console do browser
+  */
   const products = await page.evaluate(() => {
     const products = [];
 
@@ -54,7 +57,7 @@ export async function main() {
 
     document
       .querySelectorAll(".a-carousel-card")
-
+      // o retorno é NodeList, que não possui o método .map. Por isso usei forEach
       .forEach((item) => {
         const [rankingInc, rest] = Array.from(item.childNodes);
         const rest2 = rest.childNodes[0];
@@ -95,6 +98,7 @@ export async function main() {
           productName,
           price,
           category,
+          // falta o link
         });
       });
 
@@ -104,15 +108,12 @@ export async function main() {
   console.log({ products });
 
   await browser.close();
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      products,
+      message: "Aqui estão os mais vendidos da Amazon.",
+    }),
+  };
 }
-/*
-{
-  ranking
-  estrelas
-  avaliações
-  nome
-  preço
-  link
-  categoria check
-}
-*/
