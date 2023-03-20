@@ -16,7 +16,22 @@ package:
 functions:
   RunAmazonScraper:
     handler: src/functions/runAmazonScraper/handler.main
+    layers:
+      - !Ref ChromiumLambdaLayer
+    memorySize: 1024
+    timeout: 30 # limite imposto pela AWS para endpoints
     events:
       - http:
           path: amazon/mais-vendidos
           method: get
+
+layers:
+  chromium:
+    package:
+      artifact: chromium/chromium.zip
+
+custom:
+  esbuild:
+    exclude:
+      - "@sparticuz/chromium"
+    keepOutputDirectory: true

@@ -17,11 +17,12 @@
   },
   "homepage": "https://github.com/lucaschristensemlima/api-scraper#readme",
   "devDependencies": {
+    "@sparticuz/chromium": "^111.0.0",
     "@types/node": "^18.15.3",
     "esbuild": "^0.17.11",
     "serverless-esbuild": "^1.40.0"
   },
   "dependencies": {
-    "puppeteer": "^19.7.5"
+    "puppeteer-core": "^19.7.0"
   }
 }
