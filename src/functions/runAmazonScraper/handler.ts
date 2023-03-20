@@ -91,6 +91,10 @@ export async function main() {
             maybePrice
           );
 
+          const link = (rest.childNodes[0].childNodes[0] as HTMLAnchorElement)
+            .href; /* fazendo meu elemento ser visto como HTMLAnchorElement,
+           pois ambos tem a mesma estrutura, com a diferena de que o segundo aceita href como propriedade*/
+
           const stars =
             starsAndAvaliations?.childNodes[0]?.childNodes[0]?.childNodes[0]
               ?.textContent;
@@ -103,15 +107,6 @@ export async function main() {
           const price = getPrice(maybeSAA, maybePrice);
           const category = getCategory(item);
 
-          console.log({
-            ranking,
-            stars,
-            avaliations,
-            productName,
-            price,
-            category,
-          });
-
           products.push({
             ranking,
             stars,
@@ -119,19 +114,22 @@ export async function main() {
             productName,
             price,
             category,
-            // falta o link
+            link,
           });
         });
 
       return Promise.resolve(products);
     });
 
-    console.log({ products });
+    const filterProducts = products.filter((product) => {
+      if (["#1", "#2", "#3"].includes(product.ranking)) return true;
+      return false;
+    });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        products,
+        products: filterProducts,
         message: "Aqui estão os mais vendidos da Amazon.",
       }),
     };
