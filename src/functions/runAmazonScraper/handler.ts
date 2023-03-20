@@ -1,5 +1,20 @@
 import puppeteer, { Browser } from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
+import type { Product } from "../../types/products";
+
+function getProductsByCategory(products: Array<Product>): {
+  [key: string]: Array<Product>;
+} {
+  const result = {};
+  products.forEach((product) => {
+    result[product.category] = [];
+  });
+  products.forEach((item) => {
+    const category = item.category;
+    result[category].push(item);
+  });
+  return result;
+}
 
 /**
  * @command sls invoke local -f RunAmazonScraper
@@ -126,10 +141,12 @@ export async function main() {
       return false;
     });
 
+    const productsByCategory = getProductsByCategory(filterProducts);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
-        products: filterProducts,
+        productsByCategory,
         message: "Aqui estão os mais vendidos da Amazon.",
       }),
     };
