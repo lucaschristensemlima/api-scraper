@@ -1,5 +1,8 @@
 import puppeteer, { Browser } from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
+import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import * as uuid from "uuid";
+import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import type { Product } from "../../types/products";
 
 function getProductsByCategory(products: Array<Product>): {
@@ -14,6 +17,30 @@ function getProductsByCategory(products: Array<Product>): {
     result[category].push(item);
   });
   return result;
+}
+
+async function saveSearch(productsByCategory: {
+  [key: string]: Array<Product>;
+}) {
+  const client = new DynamoDBClient({});
+
+  console.log(process.env.tableName);
+
+  const input = {
+    TableName: process.env.tableName, //criar a ref no serverless.yml
+    Item: marshall({
+      // marshall é utilizado para tornar meu json um dynamodb json e assim ser aceito no dynamo
+      id: uuid.v4(),
+      createdAt: Date.now().toString,
+      productsByCategory,
+    }),
+  };
+
+  const command = new PutItemCommand(input);
+
+  await client.send(command);
+
+  return unmarshall(input.Item);
 }
 
 /**
@@ -143,10 +170,12 @@ export async function main() {
 
     const productsByCategory = getProductsByCategory(filterProducts);
 
+    const search = await saveSearch(productsByCategory);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
-        productsByCategory,
+        search,
         message: "Aqui estão os mais vendidos da Amazon.",
       }),
     };

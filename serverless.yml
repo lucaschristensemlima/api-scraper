@@ -11,6 +11,8 @@ provider:
       Action:
         - dynamodb:*
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
+  environment:
+    tableName: !Ref SearchesTable
 
 plugins:
   - serverless-esbuild
