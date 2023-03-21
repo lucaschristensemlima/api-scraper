@@ -43,7 +43,7 @@ custom:
 
 resources:
   Resources:
-    ProductsTable:
+    SearchesTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
@@ -52,7 +52,7 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: "HASH"
-        TableName: api-scraper-products
+        TableName: api-scraper-searches
         ProvisionedThroughput:
           ReadCapacityUnits: "5"
           WriteCapacityUnits: "5"
