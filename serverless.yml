@@ -30,6 +30,13 @@ functions:
     events:
       - http:
           path: amazon/mais-vendidos
+          method: post
+
+  GetSearch:
+    handler: src/functions/getSearch/handler.main
+    events:
+      - http:
+          path: amazon/mais-vendidos/{searchId}
           method: get
 
 layers:
