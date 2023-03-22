@@ -93,6 +93,7 @@ Nesse exemplo usaremos o Insomnia, mas você poderá utilizar o seu API Client d
 ```
 POST - https://liwso70f31.execute-api.us-east-1.amazonaws.com/dev/amazon/mais-vendidos
 GET - https://liwso70f31.execute-api.us-east-1.amazonaws.com/dev/amazon/mais-vendidos/{searchId}
+GET - https://liwso70f31.execute-api.us-east-1.amazonaws.com/dev/amazon/mais-vendidos
 ```
 
 ### `RunAmazonScraper`
@@ -151,7 +152,44 @@ Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazona
             ...
 		}
 	},
-	"message": "Aqui estão os mais vendidos da Amazon."
+	"message": "Busca retornada com sucesso!"
+}
+```
+
+### `ListSearch`
+
+Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazonaws.com/dev/amazon/mais-vendidos` e espere uma resposta similar a:
+
+```json
+{
+	"searches": [
+		{
+			"createdAt": "Wed Mar 22 2023 09:14:38 GMT-0300 (Brasilia Standard Time)",
+			"id": "fbf9ceac-2fe6-4258-b3b9-5d7b07988e9e",
+			"productsByCategory": {
+				"Mais Vendidos em Esporte": [
+					{
+						"avaliations": "4.754",
+						"price": "R$ 53,10",
+						"link": "https://www.amazon.com.br/Caixa-T%C3%A9rmica-18L-Mor-Azul/dp/B078P2V57D/ref=zg-bs_sports_sccl_1/143-0188063-7975900?pd_rd_w=u5OpK&content-id=amzn1.sym.b84c4b85-d0b6-44ab-b250-acbd7d0f923e&pf_rd_p=b84c4b85-d0b6-44ab-b250-acbd7d0f923e&pf_rd_r=CP5TQN4X8JC24TKS2SV9&pd_rd_wg=j4MxG&pd_rd_r=99c22cfd-4ff4-404d-b7b5-ddb41478576e&pd_rd_i=B078P2V57D&psc=1",
+						"ranking": "#1",
+						"stars": "4,7 de 5 estrelas",
+						"category": "Mais Vendidos em Esporte",
+						"productName": "Caixa Térmica 18 Litros Mor Azul"
+					},
+                    ...
+                ],
+                "Mais Vendidos em Eletrônicos": [...],
+                ...
+            }
+            {
+                "createdAt": "2023-03-22T14:11:32.793Z",
+			    "id": "8d82ad70-30f6-42bd-a45d-77d5c7224109",
+			    "productsByCategory": {...},
+            ...
+            }
+        }
+    ], "message": "Buscas retornadas com sucesso!"
 }
 ```
 

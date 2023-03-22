@@ -19,6 +19,7 @@ export async function main(event: Event) {
       statusCode: 200,
       body: JSON.stringify({
         searches,
+        message: "Buscas retornadas com sucesso!",
       }),
     };
   } catch (e) {
