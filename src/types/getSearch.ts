@@ -1,5 +1,5 @@
 export interface Event {
-  pathParamaters: {
+  pathParameters: {
     searchId: string;
   };
 }

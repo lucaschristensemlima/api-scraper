@@ -45,9 +45,11 @@ layers:
       artifact: chromium/chromium.zip
 
 custom:
-  esbuild:
+  esbuild: # remove pacotes que já estão no lambda e com o tsc, transforma código ESM em CommonJS
     exclude:
       - "@sparticuz/chromium"
+      - "@aws-sdk/client-dynamodb"
+      - "@aws-sdk/util-dynamodb"
     keepOutputDirectory: true
 
 resources:
