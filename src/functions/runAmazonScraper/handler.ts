@@ -27,11 +27,11 @@ async function saveSearch(productsByCategory: {
   console.log(process.env.tableName);
 
   const input = {
-    TableName: process.env.tableName, //criar a ref no serverless.yml
+    TableName: process.env.tableName,
     Item: marshall({
       // marshall é utilizado para tornar meu json um dynamodb json e assim ser aceito no dynamo
       id: uuid.v4(),
-      createdAt: Date.now().toString,
+      createdAt: new Date().toISOString(), // descobri que o padrão ISO era o utilizado em datas
       productsByCategory,
     }),
   };
