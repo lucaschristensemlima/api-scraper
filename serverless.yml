@@ -39,6 +39,13 @@ functions:
           path: amazon/mais-vendidos/{searchId}
           method: get
 
+  ListSearches:
+    handler: src/functions/listSearches/handler.main
+    events:
+      - http:
+          path: amazon/mais-vendidos
+          method: get
+
 layers:
   chromium:
     package:
