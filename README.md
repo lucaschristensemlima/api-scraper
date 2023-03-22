@@ -84,6 +84,24 @@ Depois, basta executar o seguinte comando:
 sls invoke local -f GetSearch --path src/functions/getSearch/mock.json
 ```
 
+Caso deseje obter todas as searches de um determinado dia altere o arquivo `src/functions/listSearches/mock.json` para:
+
+```json
+{
+  "queryStringParameters": {
+    "createdAt": "2023-03-22T12:15:59.544Z" // coloque a data desejada aqui
+  }
+}
+```
+
+É importante ressaltar que não é necessário utilizar a data completa como no exemplo, já que estamos utilizando a função `begins_with`
+
+Depois, basta executar o seguinte comando:
+
+```bash
+sls invoke local -f GetSearch --path src/functions/listSearch/mock.json
+```
+
 &nbsp;
 
 ## 🚀 Invocando via HTTP
@@ -156,7 +174,7 @@ Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazona
 }
 ```
 
-### `ListSearch`
+### `ListSearches`
 
 Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazonaws.com/dev/amazon/mais-vendidos` e espere uma resposta similar a:
 
@@ -192,6 +210,8 @@ Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazona
     ], "message": "Buscas retornadas com sucesso!"
 }
 ```
+
+Lembre-se você pode passar o campo `createdAt` para filtrar pela data de criação (é um `begins_with`, aproveite!)
 
 &nbsp;
 
