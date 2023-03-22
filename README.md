@@ -1,7 +1,3 @@
-# api-scraper
-
-antes de rodar o script deploy-layer.sh instalar make e zip
-
 <h1 align="center">API Scraper</h1>
 <h3 align="center">Aplicação desenvolvida para o processo seletivo de estágio da empresa BGC Brasil</h3>
 
@@ -163,4 +159,4 @@ Chame, com o método GET a url `https://liwso70f31.execute-api.us-east-1.amazona
 
 ## 👩‍💻 Autor
 
-Feito por[Lucas Christensem Lima](https://www.linkedin.com/in/lucaschristensem/).
+Feito por [Lucas Christensem Lima](https://www.linkedin.com/in/lucaschristensem/).
